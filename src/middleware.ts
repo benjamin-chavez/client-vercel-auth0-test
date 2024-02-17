@@ -26,6 +26,7 @@ export default withMiddlewareAuthRequired(async function middleware(
   const token = user?.accessToken;
 
   response.headers.set('Authorization', `Bearer ${token}`);
+  response.headers.set('path', `req.nextUrl.pathname`);
 
   return response;
 });
