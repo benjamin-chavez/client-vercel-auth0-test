@@ -76,10 +76,10 @@ export default withMiddlewareAuthRequired(async function middleware(
 
   // const requestHeaders2 = new Headers(request.headers);
   // Delete a response header
-  response.headers.delete('user-id-token');
+  response.headers.set('user-id-token', `null_bisch`);
 
-  // return response;
-  return NextResponse.next();
+  return response;
+  // return NextResponse.next();
 });
 
 export const config = {
