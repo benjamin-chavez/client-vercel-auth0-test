@@ -12,6 +12,9 @@ export default withMiddlewareAuthRequired(async function middleware(
   if (req.nextUrl.pathname.startsWith('/api/auth')) {
     return;
   }
+  if (req.nextUrl.pathname.startsWith('/private')) {
+    return;
+  }
 
   const response = NextResponse.next({
     request: {
