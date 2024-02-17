@@ -66,7 +66,7 @@ export default withMiddlewareAuthRequired(async function middleware(
     // const user = session ? session.user : null;
     request: {
       // New request headers
-      // headers: requestHeaders,
+      headers: requestHeaders,
     },
   });
 
