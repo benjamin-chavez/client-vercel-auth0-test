@@ -9,6 +9,10 @@ import { NextRequest, NextResponse } from 'next/server';
 export default withMiddlewareAuthRequired(async function middleware(
   req: NextRequest
 ) {
+  if (req.nextUrl.pathname.startsWith('/api/auth')) {
+    return;
+  }
+
   const response = NextResponse.next({
     request: {
       headers: new Headers(req.headers),
