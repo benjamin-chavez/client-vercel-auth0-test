@@ -34,7 +34,7 @@ export default withMiddlewareAuthRequired(async function middleware(
   // const user = session ? session.user : null;
 
   const requestHeaders = new Headers(request.headers);
-  const response = NextResponse.json({
+  const response = NextResponse.next({
     request: {
       // New request headers
       headers: requestHeaders,
