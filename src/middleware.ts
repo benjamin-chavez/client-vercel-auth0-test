@@ -56,6 +56,7 @@ export default withMiddlewareAuthRequired(async function middleware(
     requestHeaders.set('x-hello-from-middleware1', `hello-Bearer ${token}`);
     requestHeaders.set('Authorization', `Bearer ${token}`);
   }
+  requestHeaders.set('Authorization', `Bearer - you wish`);
 
   // Now, use requestHeaders for any fetch call to your server
   // Example: fetch('your-server-endpoint', { headers: requestHeaders });
