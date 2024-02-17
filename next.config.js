@@ -8,7 +8,8 @@ const nextConfig = {
       },
       {
         source: '/api/:path*',
-        destination: 'http://localhost:5000/api/:path*',
+        // destination: 'http://localhost:5000/api/:path*',
+        destination: 'https://vercel-express-auth0-test.vercel.app/api/:path*',
       },
     ];
   },
