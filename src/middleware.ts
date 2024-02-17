@@ -46,9 +46,21 @@ export default withMiddlewareAuthRequired(async function middleware(
   //   // requestHeaders.set('Authorization', `Bearer ${token}`);
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-hello-from-middleware1', 'hello');
+  const user = await getSession(
+    request,
+    NextResponse.next({
+      // const user = session ? session.user : null;
+      request: {
+        // New request headers
+        headers: requestHeaders,
+      },
+    })
+  );
+  requestHeaders.set('x-hello-from-middleware3', 'hello');
 
   // You can also set request headers in NextResponse.rewrite
   const response = NextResponse.next({
+    // const user = session ? session.user : null;
     request: {
       // New request headers
       headers: requestHeaders,
@@ -62,5 +74,5 @@ export default withMiddlewareAuthRequired(async function middleware(
 
 export const config = {
   // matcher: ['/private/:path*', '/api/:path*'],
-  matcher: ['/:path*'],
+  matcher: ['/private/:path*', '/api/:path*', '/:path*'],
 };
