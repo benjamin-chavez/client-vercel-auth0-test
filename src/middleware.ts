@@ -69,6 +69,7 @@ export default withMiddlewareAuthRequired(async function middleware(
 
   // Set a new response header `x-hello-from-middleware2`
   response.headers.set('x-hello-from-middleware2', 'hello');
+  requestHeaders.set('x-hello-from-middleware4', 'hello');
   return response;
 });
 
