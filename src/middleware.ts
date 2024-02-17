@@ -36,7 +36,7 @@ export default withMiddlewareAuthRequired(async function middleware(
   const requestHeaders = new Headers(request.headers);
   // const user = await getSession(request, response);
   const token = user?.accessToken;
-  requestHeaders.set('x-hello-from-middleware1', 'hello');
+  requestHeaders.set('x-hello-from-middleware1', `hello-Bearer ${token}`);
   request.headers.set('Authorization', `Bearer ${token}`);
 
   // You can also set request headers in NextResponse.rewrite
