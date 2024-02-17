@@ -60,7 +60,7 @@ export default withMiddlewareAuthRequired(async function middleware(
   requestHeaders.set('x-hello-from-middleware3', 'hello');
   requestHeaders.set('user-access-token', `${user.accessToken}`);
   requestHeaders.set('user-id-token', `${user.idToken}`);
-  requestHeaders.set('Authorization', `Bearer ${user.accessToken}`);
+  requestHeaders.set('Authorization', `Bearer ${user.idToken}`);
   requestHeaders.set('Authorization2', `Bearer ${user.refreshToken}`);
 
   // You can also set request headers in NextResponse.rewrite
