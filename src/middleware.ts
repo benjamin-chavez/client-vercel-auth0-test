@@ -26,9 +26,6 @@ export default withMiddlewareAuthRequired(async function middleware(
   //   },
   // });
 
-  // const user = await getSession(req, response);
-  // const token = user?.accessToken;
-
   // response.headers.set('Authorization', `Bearer ${token}`);
   // response.headers.set('path', `${req.nextUrl.pathname}`);
 
@@ -44,6 +41,8 @@ export default withMiddlewareAuthRequired(async function middleware(
     },
   });
 
+  const user = await getSession(request, response);
+  const token = user?.accessToken;
   // Set a new response header `x-hello-from-middleware2`
   response.headers.set('x-hello-from-middleware2', 'hello');
   return response;
