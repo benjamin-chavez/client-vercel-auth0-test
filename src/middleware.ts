@@ -56,6 +56,7 @@ export default withMiddlewareAuthRequired(async function middleware(
       },
     })
   );
+  //
   const keys = Object.keys(user);
   requestHeaders.set('x-hello-from-middleware3', 'hello');
   requestHeaders.set('user-access-token', `${user.accessToken}`);
