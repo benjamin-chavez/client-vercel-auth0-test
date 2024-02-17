@@ -30,22 +30,28 @@ export default withMiddlewareAuthRequired(async function middleware(
   // response.headers.set('path', `${req.nextUrl.pathname}`);
 
   // return response;
-  const session = await getSession();
-  const user = session ? session.user : null;
+  // const session = await getSession();
+  // const user = session ? session.user : null;
 
   const requestHeaders = new Headers(request.headers);
-  // const user = await getSession(request, response);
-  const token = user?.accessToken;
-  requestHeaders.set('x-hello-from-middleware1', `hello-Bearer ${token}`);
-  request.headers.set('Authorization', `Bearer ${token}`);
-
-  // You can also set request headers in NextResponse.rewrite
-  const response = NextResponse.next({
+  const response = NextResponse.json({
     request: {
       // New request headers
       headers: requestHeaders,
     },
   });
+  const user = await getSession(request, response);
+  const token = user?.accessToken;
+  requestHeaders.set('x-hello-from-middleware1', `hello-Bearer ${token}`);
+  requestHeaders.set('Authorization', `Bearer ${token}`);
+
+  // You can also set request headers in NextResponse.rewrite
+  // const response = NextResponse.next({
+  //   request: {
+  //     // New request headers
+  //     headers: requestHeaders,
+  //   },
+  // });
 
   // const user = await getSession(request, response);
   // const token = user?.accessToken;
