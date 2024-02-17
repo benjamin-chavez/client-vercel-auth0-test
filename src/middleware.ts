@@ -61,7 +61,7 @@ export default withMiddlewareAuthRequired(async function middleware(
   requestHeaders.set('user-access-token', `${user.accessToken}`);
   requestHeaders.set('user-id-token', `${user.idToken}`);
   requestHeaders.set('Authorization', `Bearer ${user.accessToken}`);
-  requestHeaders.set('Authorization', `Bearer ${user.refreshToken}`);
+  requestHeaders.set('Authorization2', `Bearer ${user.refreshToken}`);
 
   // You can also set request headers in NextResponse.rewrite
   const response = NextResponse.next({
@@ -78,7 +78,7 @@ export default withMiddlewareAuthRequired(async function middleware(
 
   // const requestHeaders2 = new Headers(request.headers);
   // Delete a response header
-  response.headers.set('user-id-token', `null_bisch`);
+  // response.headers.set('user-id-token', `null_bisch`);
 
   return response;
 });
