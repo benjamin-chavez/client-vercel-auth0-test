@@ -31,7 +31,6 @@ export default withMiddlewareAuthRequired(async function middleware(
 
   // return response;
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-hello-from-middleware1', 'hello');
 
   // You can also set request headers in NextResponse.rewrite
   const response = NextResponse.next({
@@ -43,8 +42,12 @@ export default withMiddlewareAuthRequired(async function middleware(
 
   const user = await getSession(request, response);
   const token = user?.accessToken;
+  requestHeaders.set('x-hello-from-middleware1', 'hello');
+  request.headers.set('Authorization', `Bearer ${token}`);
   // Set a new response header `x-hello-from-middleware2`
   response.headers.set('x-hello-from-middleware2', 'hello');
+  response.headers.set('Authorization', `Bearer ${token}`);
+  // response.headers.set('path', `${req.nextUrl.pathname}`);
   return response;
 });
 
