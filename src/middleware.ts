@@ -56,11 +56,9 @@ export default withMiddlewareAuthRequired(async function middleware(
       },
     })
   );
+  const keys = Object.keys(user);
   requestHeaders.set('x-hello-from-middleware3', 'hello');
-  requestHeaders.set(
-    'x-hello-from-middlewarezzz',
-    `${JSON.stringify(user, null, 2)}`
-  );
+  requestHeaders.set('x-hello-from-middlewarezzz', `${keys}`);
 
   // You can also set request headers in NextResponse.rewrite
   const response = NextResponse.next({
