@@ -78,7 +78,8 @@ export default withMiddlewareAuthRequired(async function middleware(
   // Delete a response header
   response.headers.delete('user-id-token');
 
-  return response;
+  // return response;
+  return NextResponse.next();
 });
 
 export const config = {
