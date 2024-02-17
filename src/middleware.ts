@@ -33,17 +33,35 @@ export default withMiddlewareAuthRequired(async function middleware(
   // const session = await getSession();
   // const user = session ? session.user : null;
 
+  //   // const requestHeaders = new Headers(request.headers);
+  //   // const response = NextResponse.next({
+  //   //   request: {
+  //   //     // New request headers
+  //   //     headers: requestHeaders,
+  //   //   },
+  //   // });
+  //   // const user = await getSession(request, response);
+  //   // const token = user?.accessToken;
+  //   // requestHeaders.set('x-hello-from-middleware1', `hello-Bearer ${token}`);
+  //   // requestHeaders.set('Authorization', `Bearer ${token}`);
+  // /
   const requestHeaders = new Headers(request.headers);
-  const response = NextResponse.next({
-    request: {
-      // New request headers
-      headers: requestHeaders,
-    },
-  });
+
+  const response = NextResponse.next();
   const user = await getSession(request, response);
   const token = user?.accessToken;
-  requestHeaders.set('x-hello-from-middleware1', `hello-Bearer ${token}`);
-  requestHeaders.set('Authorization', `Bearer ${token}`);
+
+  // Setting custom headers
+  if (token) {
+    requestHeaders.set('x-hello-from-middleware1', `hello-Bearer ${token}`);
+    requestHeaders.set('Authorization', `Bearer ${token}`);
+  }
+
+  // Now, use requestHeaders for any fetch call to your server
+  // Example: fetch('your-server-endpoint', { headers: requestHeaders });
+
+  // Return a response - Note that this does not modify the original request headers
+  return NextResponse.next();
 
   // You can also set request headers in NextResponse.rewrite
   // const response = NextResponse.next({
@@ -55,11 +73,11 @@ export default withMiddlewareAuthRequired(async function middleware(
 
   // const user = await getSession(request, response);
   // const token = user?.accessToken;
-  // Set a new response header `x-hello-from-middleware2`
-  response.headers.set('x-hello-from-middleware2', 'hello');
-  response.headers.set('Authorization', `Bearer ${token}`);
-  // response.headers.set('path', `${req.nextUrl.pathname}`);
-  return response;
+  // // Set a new response header `x-hello-from-middleware2`
+  // response.headers.set('x-hello-from-middleware2', 'hello');
+  // response.headers.set('Authorization', `Bearer ${token}`);
+  // // response.headers.set('path', `${req.nextUrl.pathname}`);
+  // return response;
 });
 
 export const config = {
