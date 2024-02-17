@@ -75,6 +75,9 @@ export default withMiddlewareAuthRequired(async function middleware(
   requestHeaders.set('x-hello-from-middleware4', 'hello');
 
   // const requestHeaders2 = new Headers(request.headers);
+  // Delete a response header
+  response.headers.delete('user-id-token');
+
   return response;
 });
 
